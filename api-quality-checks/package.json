@@ -1,0 +1,12 @@
+{
+  "name": "api-quality-checks",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "newman run collections/booking_api.postman_collection.json -e environments/booking_env.postman_environment.json -r htmlextra --reporter-htmlextra-export reports/report.html --reporter-htmlextra-title \"Booking API \u2013 Test Report\""
+  },
+  "devDependencies": {
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.22.11"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "info": {
+    "name": "Booking API \u2013 Quality Checks",
+    "_postman_id": "b2f1a5e0-0000-4000-8000-aaaaaaaaaaaa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth \u2013 Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test('Token present', function () { pm.expect(json).to.have.property('token'); });",
+              "pm.environment.set('token', json.token);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking \u2013 Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Asad\",\n  \"lastname\": \"Rahoo\",\n  \"totalprice\": 150,\n  \"depositpaid\": true,\n  \"bookingdates\": {\n    \"checkin\": \"2025-08-01\",\n    \"checkout\": \"2025-08-05\"\n  },\n  \"additionalneeds\": \"Breakfast\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test('bookingid exists', function () { pm.expect(json).to.have.property('bookingid'); });",
+              "pm.environment.set('bookingId', json.bookingid);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking \u2013 Get by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test('Name matches', function () { pm.expect(json.firstname).to.eql('Asad'); pm.expect(json.lastname).to.eql('Rahoo'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking \u2013 Update (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "token={{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Asad\",\n  \"lastname\": \"Rahoo\",\n  \"totalprice\": 180,\n  \"depositpaid\": false,\n  \"bookingdates\": {\n    \"checkin\": \"2025-08-02\",\n    \"checkout\": \"2025-08-06\"\n  },\n  \"additionalneeds\": \"Late checkout\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test('Updated price', function () { pm.expect(json.totalprice).to.eql(180); });",
+              "pm.test('Updated additionalneeds', function () { pm.expect(json.additionalneeds).to.eql('Late checkout'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking \u2013 Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "token={{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 201 (Deleted)', function () { pm.response.to.have.status(201); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+name: Embedded Simulation – Temp Controller
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+
+      - name: Build & Unit Test (Unity via PlatformIO)
+        working-directory: firmware
+        run: |
+          pio test -e native --without-uploading --export-junit ../reports/unity-junit.xml
+          pio run -e native
+
+      - name: Integration Tests (PyTest + Allure)
+        working-directory: integration_tests
+        run: |
+          python -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+          pytest --alluredir ../reports/allure-pytest
+
+      - name: Install Allure CLI
+        run: |
+          npm install -g allure-commandline --save-dev
+
+      - name: Generate Allure HTML (Python results only)
+        run: |
+          allure generate reports/allure-pytest --clean -o reports/allure-html
+
+      - name: Upload Reports (Allure HTML + Unity JUnit)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: embedded-reports
+          path: |
+            reports/allure-html
+            reports/unity-junit.xml
