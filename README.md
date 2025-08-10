@@ -15,7 +15,7 @@ End-to-end UI automation for an e-commerce platform. Implements Page Object Mode
 
 ---
 
-### 2️⃣ [API Quality Checks – PyTest + Requests + Allure](https://github.com//Asadullah-Rahoo-/api-quality-checks)
+### 2️⃣ [API Quality Checks – PyTest + Requests + Allure](https://github.com/Asadullah-Rahoo-/api-quality-checks)
 Automated API testing for a booking service. Covers status code validation, JSON schema checks, and functional workflows.
 
 **Tech:** PyTest, Requests, Allure  
@@ -23,7 +23,7 @@ Automated API testing for a booking service. Covers status code validation, JSON
 
 ---
 
-### 3️⃣ [RoboShop QA Suite – Robot Framework Hybrid Tests](https://github.com//Asadullah-Rahoo-/roboshop-qa-suite)
+### 3️⃣ [RoboShop QA Suite – Robot Framework Hybrid Tests](https://github.com/Asadullah-Rahoo-/roboshop-qa-suite)
 Hybrid test suite covering both UI and API layers with keyword-driven syntax for easy collaboration.
 
 **Tech:** Robot Framework, SeleniumLibrary, RequestsLibrary  
@@ -31,7 +31,7 @@ Hybrid test suite covering both UI and API layers with keyword-driven syntax for
 
 ---
 
-### 4️⃣ [Java Selenide POM Shop Tests](https://github.com/AsadRahu60/selenide-pom-shop-tests)
+### 4️⃣ [Java Selenide POM Shop Tests](https://github.com/Asadullah-Rahoo-/selenide-pom-shop-tests)
 Java-based UI automation using Selenide with Page Object Model for maintainable and stable test design.
 
 **Tech:** Java, Selenide, JUnit, Maven  
@@ -39,7 +39,7 @@ Java-based UI automation using Selenide with Page Object Model for maintainable 
 
 ---
 
-### 5️⃣ [Embedded Sim – Smart Temperature Controller](https://github.com/AsadRahu60/embedded-sim-temp-controller)
+### 5️⃣ [Embedded Sim – Smart Temperature Controller](https://github.com/Asadullah-Rahoo-/embedded-sim-temp-controller)
 Embedded firmware simulation tested at unit and integration levels, all automated in CI.
 
 **Tech:** C, PlatformIO, Unity Test Framework, Python, PyTest, Allure, GitHub Actions  
