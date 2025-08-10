@@ -7,7 +7,7 @@ I specialize in designing and executing **test solutions** across **UI, API, and
 
 ## 📂 Featured QA & Testing Projects
 
-### 1️⃣ [ShopSmart E2E Tests – Playwright + PyTest](./shopsmart-playwright]
+### 1️⃣ [ShopSmart E2E Tests – Playwright + PyTest](./shopsmart-playwright)
 End-to-end UI automation for an e-commerce platform. Implements Page Object Model, reusable fixtures, and Allure reports for clear test visibility.
 
 **Tech:** Playwright, PyTest, Allure, Python  
