@@ -62,8 +62,8 @@ Embedded firmware simulation tested at unit and integration levels, all automate
 
 ## 📫 Contact
 
-- **Email:** asadullahrahoo@example.com  
-- **LinkedIn:** [linkedin.com/in/asadullahrahoo](https://linkedin.com/in/asadullahrahoo)  
+- **Email:** asadullahrahoo98@gmail.com    
+- **LinkedIn:** [linkedin.com/in/asadullahrahoo](https://linkedin.com/in/asadullahrahu/)  
 - **GitHub:** [github.com/AsadRahu60](https://github.com/AsadRahu60)
 
 ---
