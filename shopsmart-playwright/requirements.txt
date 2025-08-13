@@ -1,3 +1,4 @@
+npm
 pytest
 playwright
 allure-pytest
