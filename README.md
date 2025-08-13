@@ -13,7 +13,7 @@ End-to-end UI automation for an e-commerce platform. Implements Page Object Mode
 **Tech:** Playwright, PyTest, Allure, Python  
 **Highlights:** Cross-browser tests, modular design, ISTQB techniques
 
-[![Playwright](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/playwright.yml/badge.svg)](../../actions/workflows/playwright.yml)
+[![Playwright](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/playwright.yml/badge.svg)](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/playwright.yml)
 
 
 
