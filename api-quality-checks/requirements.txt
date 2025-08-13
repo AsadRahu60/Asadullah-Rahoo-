@@ -1,4 +1,4 @@
-npm
+
 pytest
 requests
 pytest-cov
