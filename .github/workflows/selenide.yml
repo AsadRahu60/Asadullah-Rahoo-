@@ -1,0 +1,43 @@
+name: Project 4 – Java UI Tests (Selenide)
+
+on:
+  push:
+    paths:
+      - 'selenide-pom-shop-tests/**'
+      - 'project-4-selenide-pom-shop-tests/**'
+  pull_request:
+    paths:
+      - 'selenide-pom-shop-tests/**'
+      - 'project-4-selenide-pom-shop-tests/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect project directory
+        id: detect
+        run: |
+          if [ -d project-4-selenide-pom-shop-tests ]; then echo "dir=project-4-selenide-pom-shop-tests" >> $GITHUB_OUTPUT;
+          elif [ -d selenide-pom-shop-tests ]; then echo "dir=selenide-pom-shop-tests" >> $GITHUB_OUTPUT;
+          else echo "Selenide project folder not found"; exit 1; fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - uses: browser-actions/setup-chrome@v1
+
+      - name: Run Maven tests
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          mvn -B test
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results-selenide
+          path: ${{ steps.detect.outputs.dir }}/target/allure-results
