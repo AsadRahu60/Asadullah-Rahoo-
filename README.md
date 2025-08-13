@@ -12,7 +12,11 @@ End-to-end UI automation for an e-commerce platform. Implements Page Object Mode
 
 **Tech:** Playwright, PyTest, Allure, Python  
 **Highlights:** Cross-browser tests, modular design, ISTQB techniques
-[![Playwright CI](https://img.shields.io/github/actions/workflow/status/AsadRahu60/Asadullah-Rahoo-/playwright.yml?label=Playwright%20CI)](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions)
+[![Playwright](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/playwright.yml/badge.svg)](../../actions/workflows/playwright.yml)
+
+
+
+
 
 
 
@@ -25,6 +29,7 @@ Automated API testing for a booking service. Covers status code validation, JSON
 **Tech:** PyTest, Requests, Allure  
 **Highlights:** Positive & negative cases, JSON schema validation, modular structure
 [![API Tests](https://img.shields.io/github/actions/workflow/status/AsadRahu60/Asadullah-Rahoo-/api-tests.yml?label=API%20Tests)](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions)
+[![API – Newman](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/api-newman.yml/badge.svg)](../../actions/workflows/api-newman.yml)
 
 ---
 
@@ -33,6 +38,7 @@ Hybrid test suite covering both UI and API layers with keyword-driven syntax for
 
 **Tech:** Robot Framework, SeleniumLibrary, RequestsLibrary  
 **Highlights:** Cross-layer coverage, human-readable syntax, acceptance testing
+[![Robot](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/robot.yml/badge.svg)](../../actions/workflows/robot.yml)
 
 ---
 
@@ -41,6 +47,7 @@ Java-based UI automation using Selenide with Page Object Model for maintainable 
 
 **Tech:** Java, Selenide, JUnit, Maven  
 **Highlights:** Smoke & regression suites, automatic waits, clean POM design
+[![Selenide](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/selenide.yml/badge.svg)](../../actions/workflows/selenide.yml)
 
 ---
 
@@ -49,6 +56,7 @@ Embedded firmware simulation tested at unit and integration levels, all automate
 
 **Tech:** C, PlatformIO, Unity Test Framework, Python, PyTest, Allure, GitHub Actions  
 **Highlights:** Firmware logic tests, simulated serial integration, CI-generated HTML reports
+[![Embedded](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/embedded.yml/badge.svg)](../../actions/workflows/embedded.yml)
 
 ---
 
