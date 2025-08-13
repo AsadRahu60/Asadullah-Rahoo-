@@ -1,0 +1,54 @@
+name: Project 3 – Robot Framework Tests
+
+on:
+  push:
+    paths:
+      - 'roboshop-qa-suite/**'
+      - 'project-3-roboshop-robot/**'
+      - 'project-3--roboshop-robot/**'
+  pull_request:
+    paths:
+      - 'roboshop-qa-suite/**'
+      - 'project-3-roboshop-robot/**'
+      - 'project-3--roboshop-robot/**'
+
+jobs:
+  robot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect project directory
+        id: detect
+        run: |
+          if [ -d project-3-roboshop-robot ]; then echo "dir=project-3-roboshop-robot" >> $GITHUB_OUTPUT;
+          elif [ -d project-3--roboshop-robot ]; then echo "dir=project-3--roboshop-robot" >> $GITHUB_OUTPUT;
+          elif [ -d roboshop-qa-suite ]; then echo "dir=roboshop-qa-suite" >> $GITHUB_OUTPUT;
+          else echo "Robot project folder not found"; exit 1; fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+
+      - name: Run Robot tests
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          robot --outputdir reports tests
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: robot-reports
+          path: ${{ steps.detect.outputs.dir }}/reports/**
