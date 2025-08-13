@@ -1,0 +1,25 @@
+name: API Tests
+on: [push, pull_request]
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+        working-directory: api-quality-checks
+
+      - name: Run tests
+        run: pytest -q
+        working-directory: api-quality-checks
+
+      - name: Upload JUnit (optional)
+        if: always()
+        run: pytest -q --junitxml=report.xml
+        working-directory: api-quality-checks
