@@ -1,34 +1,54 @@
-name: Playwright CI
+name: Project 1 – Playwright Tests
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'shopsmart-playwright/**'
+      - 'project-1-shopsmart-playwright/**'
+  pull_request:
+    paths:
+      - 'shopsmart-playwright/**'
+      - 'project-1-shopsmart-playwright/**'
 
 jobs:
-  e2e:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install deps
+      - name: Detect project directory
+        id: detect
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
-        working-directory: shopsmart-playwright
+          if [ -d project-1-shopsmart-playwright ]; then echo "dir=project-1-shopsmart-playwright" >> $GITHUB_OUTPUT;
+          elif [ -d shopsmart-playwright ]; then echo "dir=shopsmart-playwright" >> $GITHUB_OUTPUT;
+          else echo "Playwright project folder not found"; exit 1; fi
 
-      - name: Install browsers
-        run: npx playwright install --with-deps
-        working-directory: shopsmart-playwright
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies & browsers
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps
 
       - name: Run tests
-        run: npx playwright test
-        working-directory: shopsmart-playwright
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          pytest --alluredir=reports/allure-results
 
-      - name: Upload HTML report
+      - name: Install Allure CLI
+        run: npm i -g allure-commandline --save-dev
+
+      - name: Generate Allure HTML
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          allure generate reports/allure-results --clean -o reports/allure-report
+
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
-          path: shopsmart-playwright/playwright-report
-
+          name: allure-report-playwright
+          path: ${{ steps.detect.outputs.dir }}/reports/allure-report
