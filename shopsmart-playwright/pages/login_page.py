@@ -17,4 +17,5 @@ class LoginPage:
         self.page.click(self.login_button)
 
     def get_error_message(self):
+        self.page.wait_for_selector(self.error_message, state="visible", timeout=5000)
         return self.page.inner_text(self.error_message)
