@@ -1,0 +1,63 @@
+name: Project 5 – Embedded Simulation
+
+on:
+  push:
+    paths:
+      - 'embedded-sim-temp-controller/**'
+      - 'project-5-embedded-sim-temp-controller/**'
+  pull_request:
+    paths:
+      - 'embedded-sim-temp-controller/**'
+      - 'project-5-embedded-sim-temp-controller/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect project directory
+        id: detect
+        run: |
+          if [ -d project-5-embedded-sim-temp-controller ]; then echo "dir=project-5-embedded-sim-temp-controller" >> $GITHUB_OUTPUT;
+          elif [ -d embedded-sim-temp-controller ]; then echo "dir=embedded-sim-temp-controller" >> $GITHUB_OUTPUT;
+          else echo "Embedded project folder not found"; exit 1; fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+
+      - name: Build & Unit Test (Unity via PlatformIO)
+        run: |
+          cd "${{ steps.detect.outputs.dir }}/firmware"
+          pio test -e native --without-uploading --export-junit ../reports/unity-junit.xml
+          pio run -e native
+
+      - name: Integration Tests (PyTest + Allure)
+        run: |
+          cd "${{ steps.detect.outputs.dir }}/integration_tests"
+          python -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+          pytest --alluredir ../reports/allure-pytest
+
+      - name: Install Allure CLI
+        run: npm i -g allure-commandline --save-dev
+
+      - name: Generate Allure HTML (Python results)
+        run: |
+          cd "${{ steps.detect.outputs.dir }}"
+          allure generate reports/allure-pytest --clean -o reports/allure-html
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: embedded-reports
+          path: |
+            ${{ steps.detect.outputs.dir }}/reports/allure-html
+            ${{ steps.detect.outputs.dir }}/reports/unity-junit.xml
