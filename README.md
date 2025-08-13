@@ -29,7 +29,7 @@ Automated API testing for a booking service. Covers status code validation, JSON
 
 **Tech:** PyTest, Requests, Allure  
 **Highlights:** Positive & negative cases, JSON schema validation, modular structure
-[![API Tests](https://img.shields.io/github/actions/workflow/status/AsadRahu60/Asadullah-Rahoo-/api-tests.yml?label=API%20Tests)](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions)
+
 [![API – Newman](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions/workflows/api-newman.yml/badge.svg)](../../actions/workflows/api-newman.yml)
 
 ---
