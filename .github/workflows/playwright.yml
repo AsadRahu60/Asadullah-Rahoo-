@@ -4,11 +4,11 @@ on:
   push:
     paths:
       - 'shopsmart-playwright/**'
-      - 'project-1-shopsmart-playwright/**'
+     
   pull_request:
     paths:
       - 'shopsmart-playwright/**'
-      - 'project-1-shopsmart-playwright/**'
+      
 
 jobs:
   test:
