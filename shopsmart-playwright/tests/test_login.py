@@ -6,7 +6,6 @@ from pages.inventory_page import InventoryPage
 def test_valid_login(page, test_data):
     login_page = LoginPage(page)
     inventory_page = InventoryPage(page)
-
     login_page.load()
     login_page.login(test_data["valid_user"]["username"], test_data["valid_user"]["password"])
     assert inventory_page.is_loaded()
@@ -16,4 +15,8 @@ def test_invalid_login(page, test_data):
     login_page = LoginPage(page)
     login_page.load()
     login_page.login(test_data["invalid_user"]["username"], test_data["invalid_user"]["password"])
-    assert "error" in login_page.get_error_message().lower()
+
+    # Robust check against the real message SauceDemo shows
+    msg = login_page.get_error_message().lower()
+    print(f"[DEBUG] login error text: {msg}")
+    assert "locked out" in msg or "epic sadface" in msg
