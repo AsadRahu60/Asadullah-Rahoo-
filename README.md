@@ -12,6 +12,10 @@ End-to-end UI automation for an e-commerce platform. Implements Page Object Mode
 
 **Tech:** Playwright, PyTest, Allure, Python  
 **Highlights:** Cross-browser tests, modular design, ISTQB techniques
+[![Playwright CI](https://img.shields.io/github/actions/workflow/status/AsadRahu60/Asadullah-Rahoo-/playwright.yml?label=Playwright%20CI)](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions)
+
+
+
 
 ---
 
@@ -20,6 +24,7 @@ Automated API testing for a booking service. Covers status code validation, JSON
 
 **Tech:** PyTest, Requests, Allure  
 **Highlights:** Positive & negative cases, JSON schema validation, modular structure
+[![API Tests](https://img.shields.io/github/actions/workflow/status/AsadRahu60/Asadullah-Rahoo-/api-tests.yml?label=API%20Tests)](https://github.com/AsadRahu60/Asadullah-Rahoo-/actions)
 
 ---
 
