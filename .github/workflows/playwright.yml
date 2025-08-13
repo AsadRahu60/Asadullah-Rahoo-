@@ -3,11 +3,11 @@ name: Project 1 – Playwright Tests
 on:
   push:
     paths:
-      - 'shopsmart-playwright/**'
-     
+      - 'shopsmart-playwright/**'       # <- must match your real folder
   pull_request:
     paths:
       - 'shopsmart-playwright/**'
+
       
 
 jobs:
